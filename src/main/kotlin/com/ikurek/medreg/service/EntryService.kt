@@ -61,10 +61,11 @@ class EntryService(val entryRepository: EntryRepository) {
         val entry = entryRepository.findById(id)
 
         if (entry.isPresent) {
-
-            if (entry.get().appUserModel!!.id != userModel.id) throw UnauthorizedResourceAccess()
-            else entryRepository.delete(entry.get())
-
+            if (entry.get().appUserModel!!.id == userModel.id) {
+                entryRepository.deleteById(id)
+            } else {
+                throw UnauthorizedResourceAccess()
+            }
         }
         else throw NoDataFoundException()
     }

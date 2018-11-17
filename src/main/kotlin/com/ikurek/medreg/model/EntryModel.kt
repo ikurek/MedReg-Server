@@ -15,7 +15,7 @@ data class EntryModel (
         var id: Long?,
 
         @ManyToOne(fetch = FetchType.EAGER)
-        @JoinColumn(name = "APP_USER_ID")
+        @JoinColumn(name = "USER_ID")
         @field:JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         var appUserModel: AppUserModel?,
 

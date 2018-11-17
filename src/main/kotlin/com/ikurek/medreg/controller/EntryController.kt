@@ -1,8 +1,6 @@
 package com.ikurek.medreg.controller
 
 import com.ikurek.medreg.constants.SecurityConstants
-import com.ikurek.medreg.exception.NoDataFoundException
-import com.ikurek.medreg.exception.UnauthorizedResourceAccess
 import com.ikurek.medreg.model.EntryModel
 import com.ikurek.medreg.service.AppUserDetailsService
 import com.ikurek.medreg.service.EntryService
@@ -61,7 +59,7 @@ class EntryController(
 
     @DeleteMapping("/entries/{id}")
     fun deleteEntry(@RequestHeader(SecurityConstants.HEADER_STRING) token: String,
-                    @PathVariable("id") id: Long): ResponseEntity<Void> {
+                    @PathVariable("id") id: Long): ResponseEntity<String> {
         val userForToken = appUserDetailsService.loadUserByAuthToken(token)
 
         entryService.deleteByIdForUser(id, userForToken)

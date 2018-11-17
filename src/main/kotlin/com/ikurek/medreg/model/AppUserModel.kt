@@ -1,7 +1,5 @@
 package com.ikurek.medreg.model
 
-import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 
@@ -22,9 +20,9 @@ data class AppUserModel(
 
         @ElementCollection(targetClass = EntryModel::class)
         @OneToMany(
-                mappedBy = "appUserModel",
-                cascade = [CascadeType.MERGE, CascadeType.ALL],
-                fetch = FetchType.EAGER)
+                cascade = [CascadeType.ALL],
+                orphanRemoval = true,
+                mappedBy = "appUserModel")
         @field:JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         var entries: List<EntryModel>
 )
